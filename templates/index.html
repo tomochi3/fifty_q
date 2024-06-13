@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>５０問アプリ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            margin: 0;
+        }
+        .question label {
+            margin-right: 10px;
+        }
+        .question input {
+            margin-right: 5px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach((question, index) => {
+                question.addEventListener('keydown', (event) => {
+                    if (event.key === '1' || event.key === '2') {
+                        const radioButton = question.querySelector(`input[value="${event.key}"]`);
+                        if (radioButton) {
+                            radioButton.checked = true;
+                            // 移動を防止するためにイベントのデフォルト動作を無効にする
+                            event.preventDefault();
+                            // 次の質問にフォーカスを移動
+                            if (index < questions.length - 1) {
+                                questions[index + 1].focus();
+                            }
+                        }
+                    }
+                });
+            });
+            // 最初の質問にフォーカスを設定
+            if (questions.length > 0) {
+                questions[0].focus();
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>質問に答えてください</h1>
+    <form method="post">
+        {% for question in questions %}
+        <div class="question" tabindex="0">
+            <p>{{ loop.index }}. {{ question.question }}</p>
+            <label><input type="radio" name="answer_{{ loop.index0 }}" value="1"> 1 (はい)</label>
+            <label><input type="radio" name="answer_{{ loop.index0 }}" value="2"> 2 (いいえ)</label>
+        </div>
+        {% endfor %}
+        <button type="submit">回答する</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>結果</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .result {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>結果</h1>
+    {% for result in results %}
+    <div class="result">{{ result }}</div>
+    {% endfor %}
+    <a href="/">もう一度試す</a>
+</body>
+</html>
