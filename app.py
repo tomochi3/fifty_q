@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import logging
 from questions import questions  # 質問データをインポート
 
@@ -23,9 +23,13 @@ def index():
             else:
                 results.append(f"質問{i+1}: 不正解")
         
-        return render_template('result.html', results=results)
+        return render_template('result.html', question_results=zip(questions, results))
+
     
     return render_template('index.html', questions=questions)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

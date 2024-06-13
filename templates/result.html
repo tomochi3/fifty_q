@@ -14,9 +14,12 @@
 </head>
 <body>
     <h1>結果</h1>
-    {% for result in results %}
+    
+    {% for question, result in question_results %}
+    <div class="question">{{ question.question }}</div>
     <div class="result">{{ result }}</div>
     {% endfor %}
+
     <a href="/">もう一度試す</a>
 </body>
 </html>
